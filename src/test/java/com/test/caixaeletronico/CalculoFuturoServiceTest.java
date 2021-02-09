@@ -31,7 +31,6 @@ public class CalculoFuturoServiceTest {
     void shouldReturnCalculoOk(){
         BeneficiarioDTO beneficiarioDTO = new BeneficiarioDTO(1l, 1234l, "1234@124.com", new BigDecimal(200000), 8);
         BigDecimal valor = calculoFuturoService.calculaValorReceber(beneficiarioDTO, new BigDecimal(10000));
-        System.out.print(valor);
         assertThat(valor).isEqualByComparingTo(new BigDecimal(2187.5));
     }
 

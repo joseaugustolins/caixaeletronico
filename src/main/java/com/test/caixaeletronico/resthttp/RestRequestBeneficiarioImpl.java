@@ -20,12 +20,17 @@ public class RestRequestBeneficiarioImpl implements RestRequestBeneficiario {
     }
 
     @Override
-    public ResponseEntity requestGetById(String uri) throws RuntimeException {
+    public ResponseEntity requestGetById(String uri)  {
+        try {
             RestTemplate restTemplate = new RestTemplate();
             HttpHeaders headers = new HttpHeaders();
             headers.setContentType(MediaType.APPLICATION_JSON);
             ResponseEntity<BeneficiarioDTO> result = restTemplate.getForEntity(uri, BeneficiarioDTO.class);
             return result;
+        }catch(HttpClientErrorException ex){
+            throw new BeneficiarioNotFoundException("Resource Not Found");
+        }
+
     }
 
 }

@@ -33,7 +33,6 @@ public class CalculoFuturoServiceImpl implements  CalculoFuturoService{
     @Override
     public void validate(AporteRequest aporteRequest){
         final String uri = "http://localhost:8080/beneficiario/"+aporteRequest.getIdBeneficiario();
-        System.out.println(uri);
         try {
             restRequest.requestGetById(uri);
         }catch (BeneficiarioNotFoundException ex){
@@ -43,9 +42,6 @@ public class CalculoFuturoServiceImpl implements  CalculoFuturoService{
 
     @Override
     public BigDecimal calculaValorReceber(BeneficiarioDTO beneficiarioDTO, BigDecimal valorAporte){
-        if(beneficiarioDTO.getAnos()==0){
-            throw new ArithmeticException("Bad Request");
-        }
         BigDecimal valorTotal = beneficiarioDTO.getValor().add(valorAporte);
         return valorTotal.divide(new BigDecimal(beneficiarioDTO.getAnos()*12), 2, RoundingMode.HALF_UP);
     }
